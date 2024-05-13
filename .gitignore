@@ -18,6 +18,7 @@
 .env.development.local
 .env.test.local
 .env.production.local
+.env.sample
 
 npm-debug.log*
 yarn-debug.log*
@@ -25,7 +26,6 @@ yarn-error.log*
 
 node_modules
 .env
-.env.sample
 
 # Hardhat files
 /cache
