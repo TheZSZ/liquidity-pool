@@ -17,11 +17,19 @@ async function main() {
         `Peach Token contract deployed to https://cardona-zkevm.polygonscan.com/address/${peachToken.target}`
     );
 
-    const deployedContract = await hre.ethers.deployContract("Counter");
-    await deployedContract.waitForDeployment();
+    // Deploy Faucet Contract
+    const Faucet = await hre.ethers.getContractFactory("Faucet");
+    const faucet = await Faucet.deploy(mangoToken.target, peachToken.target);
+    await faucet.waitForDeployment();
     console.log(
-        `Counter contract deployed to https://cardona-zkevm.polygonscan.com/address/${deployedContract.target}`
+        `Faucet contract deployed to https://cardona-zkevm.polygonscan.com/address/${faucet.target}`
     );
+
+    // const deployedContract = await hre.ethers.deployContract("Counter");
+    // await deployedContract.waitForDeployment();
+    // console.log(
+    //     `Counter contract deployed to https://cardona-zkevm.polygonscan.com/address/${deployedContract.target}`
+    // );
 }
 
 main().catch((error) => {

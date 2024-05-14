@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Home from './components/Home';
+import StakePeach from "./components/StakePeach";
+import Faucet from "./components/Faucet";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -27,17 +31,40 @@ function App() {
     fetchCount().catch(console.error);
   }, []);
 
+  // return (
+  //   <Container maxWidth="sm">
+  //     <Card sx={{ minWidth: 275, marginTop: 20 }}>
+  //       <CardContent>
+  //         <p>Count: {count}</p>
+  //         <Button onClick={incrementCounter} variant="outlined" disabled={isLoading}>
+  //           {isLoading ? "Loading..." : "+1"}
+  //         </Button>
+  //       </CardContent>
+  //     </Card>
+  //   </Container>
+  // );
   return (
-    <Container maxWidth="sm">
-      <Card sx={{ minWidth: 275, marginTop: 20 }}>
-        <CardContent>
-          <p>Count: {count}</p>
-          <Button onClick={incrementCounter} variant="outlined" disabled={isLoading}>
-            {isLoading ? "Loading..." : "+1"}
-          </Button>
-        </CardContent>
-      </Card>
-    </Container>
+    <Router>
+      <div>
+        <nav>
+          <Link to="/">Home</Link>
+          <Link to="/stake-peach">Stake Peach</Link>
+          <Link to="/faucet">Faucet</Link>
+          {/* <Link to="/stake-mango">Stake Mango</Link>
+          <Link to="/withdraw-peach">Withdraw Peach</Link>
+          <Link to="/withdraw-mango">Withdraw Mango</Link> */}
+          {/* <ConnectWallet /> */}
+        </nav>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/stake-peach" element={<StakePeach />} />
+          <Route path="/faucet" element={<Faucet />} />
+          {/* <Route path="/stake-mango" component={StakeMango} />
+          <Route path="/withdraw-peach" component={WithdrawPeach} />
+          <Route path="/withdraw-mango" component={WithdrawMango} /> */}
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
