@@ -5,9 +5,9 @@ async function main() {
     const [deployer] = await hre.ethers.getSigners();
 
     // addresses of the deployed contracts
-    const mangoTokenAddress = "0xcABF8704CF59D9878D250EE882657535155662Ed";
-    const peachTokenAddress = "0xa4b6BC9aB930F6e9041df9C25b6A676a02511c19";
-    const faucetAddress = "0xc765C1298695B7Ada706357bD026A460A418bB0C";
+    const mangoTokenAddress = "0xc1bbf533c9Cf8Cd5ce1787BAA3CC1e328b9242e6";
+    const peachTokenAddress = "0xBbf8D38C15767fbd083f35939B849c272AA79334";
+    const faucetAddress = "0x8ddC496089DCbB54508cc14AB1722E3131E80754";
 
     // get the contract factories
     const MangoToken = await hre.ethers.getContractAt("Mango", mangoTokenAddress, deployer);

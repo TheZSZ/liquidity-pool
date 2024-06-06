@@ -8,6 +8,9 @@ contract Faucet is Ownable {
     IERC20 public peach;
     IERC20 public mango;
 
+    event PeachTokensRequested(address indexed to, uint256 amount);
+    event MangoTokensRequested(address indexed to, uint256 amount);
+
     constructor(IERC20 _peach, IERC20 _mango) Ownable(msg.sender) {
         peach = _peach;
         mango = _mango;
@@ -17,12 +20,14 @@ contract Faucet is Ownable {
     function requestPeachTokens(address to, uint256 amount) external onlyOwner {
         require(peach.balanceOf(address(this)) >= amount, "Insufficient Peach token balance in faucet");
         peach.transfer(to, amount);
+        emit PeachTokensRequested(to, amount);
     }
 
     // request mango tokens from faucet
     function requestMangoTokens(address to, uint256 amount) external onlyOwner {
         require(mango.balanceOf(address(this)) >= amount, "Insufficient Mango token balance in faucet");
         mango.transfer(to, amount);
+        emit MangoTokensRequested(to, amount);
     }
 
     // returns amount of Peach remaining

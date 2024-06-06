@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import { provider, signer } from '../utils/ethereum';
-import TokenFaucetABI from '../contracts/Faucet.sol/Faucet.json'; // Import the ABI of your TokenFaucet contract
+import TokenFaucetABI from '../contracts/Faucet.sol/Faucet.json';
 
 const Faucet = () => {
   const [peachBalance, setPeachBalance] = useState(0);
@@ -10,8 +10,9 @@ const Faucet = () => {
   const [message, setMessage] = useState('');
   const faucetAddress = '0xc765C1298695B7Ada706357bD026A460A418bB0C'; // Replace with your Faucet contract address
 
+  // fetch the balance of peach and mango tokens currently in the faucet
   const fetchBalances = async () => {
-    const faucetContract = new ethers.Contract(faucetAddress, TokenFaucetABI, provider);
+    const faucetContract = new ethers.Contract(faucetAddress, TokenFaucetABI.abi, provider);
     const peachBalance = await faucetContract.getPeachBalance();
     const mangoBalance = await faucetContract.getMangoBalance();
     setPeachBalance(ethers.utils.formatUnits(peachBalance, 18));
@@ -19,18 +20,36 @@ const Faucet = () => {
   };
 
   useEffect(() => {
+    const faucetContract = new ethers.Contract(faucetAddress, TokenFaucetABI.abi, provider);
+
+    // refresh the balances when tokens are requested
+    const handlePeachTokensRequested = () => {
+      fetchBalances();
+    };
+
+    const handleMangoTokensRequested = () => {
+      fetchBalances();
+    };
+
+    // on event listeners
+    faucetContract.on("PeachTokensRequested", handlePeachTokensRequested);
+    faucetContract.on("MangoTokensRequested", handleMangoTokensRequested);
+
     fetchBalances();
-    const interval = setInterval(fetchBalances, 10000); // Poll every 10 seconds
-    return () => clearInterval(interval); // Cleanup on unmount
+
+    return () => {
+      faucetContract.off("PeachTokensRequested", handlePeachTokensRequested);
+      faucetContract.off("MangoTokensRequested", handleMangoTokensRequested);
+    };
   }, []);
 
   const handleRequestPeach = async () => {
     try {
-      const faucetContract = new ethers.Contract(faucetAddress, TokenFaucetABI, signer);
+      const faucetContract = new ethers.Contract(faucetAddress, TokenFaucetABI.abi, signer);
       const tx = await faucetContract.requestPeachTokens(await signer.getAddress(), ethers.utils.parseUnits(amount, 18));
       await tx.wait();
       setMessage('Peach tokens requested successfully!');
-      fetchBalances(); // Fetch balances after request
+      fetchBalances(); // fetch balances after request
     } catch (error) {
       console.error(error);
       setMessage('Failed to request Peach tokens.');
@@ -39,11 +58,11 @@ const Faucet = () => {
 
   const handleRequestMango = async () => {
     try {
-      const faucetContract = new ethers.Contract(faucetAddress, TokenFaucetABI, signer);
+      const faucetContract = new ethers.Contract(faucetAddress, TokenFaucetABI.abi, signer);
       const tx = await faucetContract.requestMangoTokens(await signer.getAddress(), ethers.utils.parseUnits(amount, 18));
       await tx.wait();
       setMessage('Mango tokens requested successfully!');
-      fetchBalances(); // Fetch balances after request
+      fetchBalances();
     } catch (error) {
       console.error(error);
       setMessage('Failed to request Mango tokens.');
