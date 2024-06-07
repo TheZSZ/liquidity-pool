@@ -8,6 +8,7 @@ contract Faucet is Ownable {
     IERC20 public peach;
     IERC20 public mango;
 
+    // events to track token requests
     event PeachTokensRequested(address indexed to, uint256 amount);
     event MangoTokensRequested(address indexed to, uint256 amount);
 
@@ -30,12 +31,12 @@ contract Faucet is Ownable {
         emit MangoTokensRequested(to, amount);
     }
 
-    // returns amount of Peach remaining
+    // returns amount of Peach remaining in faucet
     function getPeachBalance() external view returns (uint256) {
         return peach.balanceOf(address(this));
     }
 
-    // returns amount of Mango remaining
+    // returns amount of Mango remaining in faucet
     function getMangoBalance() external view returns (uint256) {
         return mango.balanceOf(address(this));
     }

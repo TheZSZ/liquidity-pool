@@ -1,3 +1,4 @@
+// deploy mango, peach, and faucet contracts
 const hre = require("hardhat");
 
 async function main() {

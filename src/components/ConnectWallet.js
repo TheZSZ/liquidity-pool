@@ -1,4 +1,3 @@
-// src/components/ConnectWallet.js
 import React from 'react';
 import { connectWallet } from '../utils/ethereum';
 
