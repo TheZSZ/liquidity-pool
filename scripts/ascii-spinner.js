@@ -24,9 +24,10 @@ const withSpinner = async (task, message) => {
     spinnerInterval = setInterval(showSpinner, spinner.interval);
 
     try {
-        await task();                   // execute the task
+        const result = await task();                   // execute the task
         clearInterval(spinnerInterval); // stop the spinner after the task is completed
-        process.stdout.write(`\r✔   Finished deploying ${message.split(' ')[1]} ${message.split(' ')[2].slice(0, -3)}\n`);     // removes ... from message
+        process.stdout.write(`\r✔   Finished deploying ${message.split(' ')[1]} ${message.split(' ')[2].slice(0, -3)}\n`);     // removes ... from message (bad coding practices lol)
+        return result;                                // return the result of the task
     } catch (error) {
         clearInterval(spinnerInterval); // stop the spinner and show an error message if the task fails
         process.stdout.write(`\r✖   ${message} - Task failed: ${error}\n`);

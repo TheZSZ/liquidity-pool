@@ -43,6 +43,7 @@ const Faucet = () => {
     };
   }, []);
 
+  // request Peach tokens from the faucet
   const handleRequestPeach = async () => {
     try {
       const faucetContract = new ethers.Contract(faucetAddress, TokenFaucetABI.abi, signer);
@@ -56,6 +57,7 @@ const Faucet = () => {
     }
   };
 
+  // request mango tokens from the faucet
   const handleRequestMango = async () => {
     try {
       const faucetContract = new ethers.Contract(faucetAddress, TokenFaucetABI.abi, signer);
