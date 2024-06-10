@@ -1,4 +1,4 @@
-// deploy mango, peach, and faucet contracts
+// deploy mango, peach, and faucet contracts (should it deploy liquidity pool contract as well?)
 const hre = require("hardhat");
 
 async function main() {

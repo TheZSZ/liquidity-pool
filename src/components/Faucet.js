@@ -73,7 +73,11 @@ const Faucet = () => {
 
   return (
     <div>
-      <h2>Token Faucet</h2>
+      <h2>
+        <a href={`https://cardona-zkevm.polygonscan.com/address/${faucetAddress}`} target="_blank" rel="noopener noreferrer">
+          Token Faucet
+        </a>
+      </h2>
       <p>Peach Token Balance: {peachBalance}</p>
       <p>Mango Token Balance: {mangoBalance}</p>
       <input

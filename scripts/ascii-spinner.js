@@ -1,3 +1,5 @@
+// move to utils with ethereum?
+
 // ascii spinner and check box to show the status of the deployment
 // uses cli-spinners to show the spinner, dynamically imports the package because es modules
 // takes a task and a message as arguments, executes the task and shows the spinner with the message

@@ -15,3 +15,4 @@ npx hardhat ignition deploy ./ignition/modules/Lock.js
 
 run project with: npm start  
 run scripts with: npx hardhat run scripts/deploy-counter.js --network zkEVM  
+first run scripts/deploy-tokens.js then deploy-faucet.js
