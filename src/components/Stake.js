@@ -4,6 +4,8 @@ import { ethers } from 'ethers';
 // import { signer } from '../utils/ethereum';
 import PeachTokenABI from '../contracts/Peach.sol/Peach.json'; // Import the ABI of your PeachToken contract
 
+// stake coconut tokens on another (example) DEXs
+
 const StakePeach = () => {
   const [amount, setAmount] = useState('');
   const [message, setMessage] = useState('');

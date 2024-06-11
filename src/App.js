@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Home from './components/Home';
-import StakePeach from "./components/StakePeach";
+import AddLiquidity from './components/AddLiquidity';
+import Stake from "./components/Stake";
 import Faucet from "./components/Faucet";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
@@ -48,8 +49,10 @@ function App() {
       <div>
         <nav>
           <Link to="/">Home</Link>
-          <Link to="/stake-peach">Stake Peach</Link>
           <Link to="/faucet">Faucet</Link>
+          <Link to="/add-liquidity">Provide Liquidity</Link>
+          <Link to="/stake">Stake Coconut Tokens</Link>
+          
           {/* <Link to="/stake-mango">Stake Mango</Link>
           <Link to="/withdraw-peach">Withdraw Peach</Link>
           <Link to="/withdraw-mango">Withdraw Mango</Link> */}
@@ -57,8 +60,10 @@ function App() {
         </nav>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/stake-peach" element={<StakePeach />} />
           <Route path="/faucet" element={<Faucet />} />
+          <Route path="/add-liquidity" element={<AddLiquidity />} />
+          <Route path="/stake" element={<Stake />} />
+          
           {/* <Route path="/stake-mango" component={StakeMango} />
           <Route path="/withdraw-peach" component={WithdrawPeach} />
           <Route path="/withdraw-mango" component={WithdrawMango} /> */}
